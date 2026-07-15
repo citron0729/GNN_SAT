@@ -1,6 +1,6 @@
 import numpy as np
 
-nodes = ["A", "B", "C", "D", "E"]
+nodes = ["A", "B", "C", "D", "E","F"]
 
 edges = [
     ("A", "B"),
@@ -8,6 +8,7 @@ edges = [
     ("B", "D"),
     ("C", "D"),
     ("D", "E"),
+    ("E", "F"),
 ]
 
 node_to_index = {
@@ -28,16 +29,25 @@ for node1, node2 in edges:
 print("隣接行列")
 print(adjacency_matrix)
 
+print("隣接行列の形状")
+print(adjacency_matrix.shape)
+
 node_features = np.array([
     1.0,
     2.0,
     3.0,
     4.0,
     5.0,
+    6.0,
 ])
 
 identity_matrix = np.eye(len(nodes))
 adjacency_with_self_loop = adjacency_matrix + identity_matrix
+
+adjacency_without_self_loop = adjacency_matrix @ node_features
+
+print("自己ループ追加前の隣接行列の特徴量")
+print(adjacency_without_self_loop)
 
 print("自己ループ付き隣接行列")
 print(adjacency_with_self_loop)
